@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+:root {
+    --color-frente: #164c59;
+    --color-fondo: #e6f0f2;
+    --color-realce: #032933;
+    --color-secundario: #3f7d8c;
+    --color-inactivo: #7cb2bf;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    font-size: 100%;
+    font-family: 'Lato', sans-serif;
+}
+body {
+    background-color: var(--color-fondo);
+    color: var(--color-frente);
+
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.menu {
+    border-bottom: solid 1px var(--color-inactivo);
+    box-sizing: border-box;
+    padding: 0.5rem 1rem 0.4rem;
+        
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.menu > :last-child {
+    margin: 0 0 0 auto;
+}
+svg {
+    fill: var(--color-secundario);
+    font-size: 1.1rem;
+    padding: 0.2rem;
+}
+svg:hover {
+    fill: var(--color-realce);
+}
+.espaciador *, .espaciador:hover * {
+    fill: var(--color-inactivo);
+    margin: 0 0.5rem;
+    opacity: 0.5;
+}
+input:not([type="range"]) {
+    display: none;
+}
+span:not(.espaciador), label {
+    cursor: pointer;
+    margin-inline: 0.2rem;
+}
+button {
+    border: none;
+    background: none;
+}
+
+/* Comportamientos específicos */
+/* Tipo de dibujo */
+#dibujoClick_label > *,
+#dibujoTeclado_label > * {
+    fill: var(--color-inactivo);
+}
+#dibujoClick:checked ~ #dibujoClick_label *{
+    fill: var(--color-secundario);
+}
+#dibujoClick:checked ~ .dibTeclado {
+    display: none;
+}
+#dibujoTeclado:checked ~ #dibujoTeclado_label * {
+    fill: var(--color-secundario);
+}
+#dibujoTeclado:checked ~ .dibClick {
+    display: none;
+}
+/* Dibujo Click */
+#dibujarClick:checked ~ #dibujarClick_label * {
+    fill: var(--color-realce);
+}
+#aerografoClick:checked ~ #aerografoClick_label * {
+    fill: var(--color-realce);
+}
+/* color random */
+#colorRandom:checked ~ #colorRandom_label * {
+    fill: var(--color-realce);
+}
+/* Borrar Click*/
+#borrarClick:checked ~ #borrarClick_label * {
+    fill: var(--color-realce);
+}
+/* Visualizar retícula */
+#reticula:checked ~ #reticula_label * {
+    fill: var(--color-realce);
+}
