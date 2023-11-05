@@ -8,8 +8,61 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-   <h1>Pizarra pixelada</h1>
-   <div id="pizarra">pizarra</div>
+   <div class="tablero">acá va el tablero</div>
 
+   <div class="menu">
+       <div>
+           <label for="dibujoClick">Click</label>
+           <input type="radio" id="dibujoClick" name="modo" value="dibujoClick" checked>
+           <label for="dibujoTeclado">Teclado</label>
+           <input type="radio" id="dibujoTeclado" name="modo" value="dibujoTeclado">
+       </div>
+
+       <div><!-- modo de dibujo por click-->
+           <label for="dibujarClick">dibujar</label>
+           <input type="radio" id="dibujarClick" name="dibujar">
+           <label for="aerografoClick">Aerógrafo</label>
+           <input type="checkbox" id="aerografoClick">
+       </div>
+       <div><!-- modo de dibujo con teclado-->
+           <span>Presiona B usar el lápiz</span>
+           <span>Presiona F usar el aerógrafo</span>
+       </div>
+       
+       <div>
+           <label for="color">color</label>
+           <input type="color" id="color">
+           <label for="colorRandom">Color aleatorio</label>
+           <input type="checkbox" id="colorRandom">
+       </div>
+       
+       <div><!-- modo de borrar con click-->
+           <label for="borrarClick">borrar</label>
+           <input type="radio" id="borrarClick" name="dibujar">
+       </div>
+       <div><!-- modo de borrar con teclado-->
+           <span>Presiona E usar el borrador</span>
+       </div>
+
+       <div>
+           <button>borrar tablero</button>
+           <label for="reticula">Ver retícula</label>
+           <input type="checkbox" id="reticula" checked>
+           <label for="formaReticula">Rericula redonda</label>
+           <input type="checkbox" id="formaReticula">
+           <label for="detalleReticula">Detalle retícula</label>
+           <input type="range" id="detalleReticula" min="16" max="96" value="32" step="16">
+           <span>detalle retícula</span>
+           <label for="formatoFull">Full</label>
+           <input type="radio" id="formatoFull" name="formato" value="pantallaComlpeta">
+           <label for="formatoCine">16:9</label>
+           <input type="radio" id="formatoCine" name="formato" value="16-9">
+           <label for="formatoFoto">3:2</label>
+           <input type="radio" id="formatoFoto" name="formato" value="3-2">
+           <label for="formatoCuadrado">1:1</label>
+           <input type="radio" id="formatoCuadrado" name="formato" value="cuadrado">
+       </div>
+   </div>
+   
 </body>
 </html>
