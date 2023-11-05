@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
 :root {
     --color-frente: #595547;
     --color-fondo: #f2efe6;
@@ -6,7 +6,7 @@
     --color-secundario: #998b5c;
     --color-advertencia: #cc544b;
 
-    --rango-ancho: 150px;
+    --rango-ancho: 120px;
     --rango-alto-linea: 0.15rem;
     --rango-tamanno-bolita: 0.6rem;
 }
@@ -16,7 +16,7 @@
 }
 html {
     font-size: 100%;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto Mono', monospace;
 }
 body {
     background-color: var(--color-fondo);
@@ -55,9 +55,11 @@ svg:hover {
     margin: 0 0.5rem;
     opacity: 0.5;
 }
-input:not([type="range"]) {
+input[type="checkbox"],
+input[type="radio"]{
     display: none;
 }
+
 span:not(.espaciador), 
 label {
     cursor: pointer;
@@ -102,6 +104,31 @@ button svg {
 #aerografo:checked ~ #aerografo_label * {
     fill: var(--color-realce);
 }
+/* Selector de color */
+input[type=color] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer; 
+    border: none;
+    margin: 0 0 0 0.2rem;
+    transform: translateY(-0.25rem);
+}
+input[type=color]::-webkit-color-swatch {
+    border-radius: 50%;
+    border: none;
+}
+input[type=color]::-webkit-color-swatch-wrapper {
+    padding: 0; 
+}
+input[type=color]::-moz-color-swatch {
+    border-radius: 50%;
+    border: none;
+}
 /* color random */
 #colorRandom:checked ~ #colorRandom_label * {
     fill: var(--color-realce);
@@ -120,7 +147,7 @@ button svg {
     fill: var(--color-realce);
 }
 /* Detalle de la grilla */
-[type=range] {
+input[type=range] {
     align-self: center;
     margin: -0.2rem 0 0;
     padding: 0;
@@ -128,39 +155,39 @@ button svg {
     width: var(--rango-ancho);
     background: none;
 }
-[type=range], [type=range]::-webkit-slider-thumb {
+input[type=range], [type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
 }
-[type=range]::-webkit-slider-runnable-track {
+input[type=range]::-webkit-slider-runnable-track {
     box-sizing: border-box;
     border: none;
     width: var(--rango-ancho);
     height: var(--rango-alto-linea);
     background: var(--color-secundario);
 }
-[type=range]::-moz-range-track {
+input[type=range]::-moz-range-track {
     box-sizing: border-box;
     border: none;
     width: var(--rango-ancho);
     height: var(--rango-alto-linea);
     background: var(--color-secundario);
 }
-[type=range]::-ms-track {
+input[type=range]::-ms-track {
     box-sizing: border-box;
     border: none;
     width: var(--rango-ancho);
     height: var(--rango-alto-linea);
     background: var(--color-secundario);
 }
-[type=range]::-moz-range-progress {
+input[type=range]::-moz-range-progress {
     height: var(--rango-alto-linea);
     background: var(--color-frente);
 }
-[type=range]::-ms-fill-lower {
+input[type=range]::-ms-fill-lower {
     height: var(--rango-alto-linea);
     background: var(--color-frente);
 }
-[type=range]::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
     margin-top: -0.2rem; /* Número mágico */
     box-sizing: border-box;
     border: none;
@@ -169,7 +196,7 @@ button svg {
     border-radius: 50%;
     background: var(--color-frente);
 }
-[type=range]::-moz-range-thumb {
+input[type=range]::-moz-range-thumb {
     box-sizing: border-box;
     border: none;
     width: var(--rango-tamanno-bolita);
@@ -177,7 +204,7 @@ button svg {
     border-radius: 50%;
     background: var(--color-frente);
 }
-[type=range]::-ms-thumb {
+input[type=range]::-ms-thumb {
     margin-top: 0;
     box-sizing: border-box;
     border: none;
@@ -186,14 +213,13 @@ button svg {
     border-radius: 50%;
     background: var(--color-frente);
 }
-[type=range]::-ms-tooltip {
+input[type=range]::-ms-tooltip {
     display: none;
 }
-
 /* formato */
 .formatoTxt {
     color: var(--color-secundario);
-    margin-top: 0.1rem;
+    margin: 0.1rem 0.5rem 0 0;
 }
 #formatoFull:checked ~ #formatoFull_label * {
     fill: var(--color-realce);
