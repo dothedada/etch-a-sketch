@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 :root {
-    --color-frente: #164c59;
-    --color-fondo: #e6f0f2;
-    --color-realce: #032933;
-    --color-secundario: #3f7d8c;
-    --color-inactivo: #7cb2bf;
+    --color-frente: #595547;
+    --color-fondo: #f2efe6;
+    --color-realce: #26241f;
+    --color-secundario: #998b5c;
+    --color-advertencia: #cc544b;
+
+    --rango-ancho: 150px;
+    --rango-alto-linea: 0.15rem;
+    --rango-tamanno-bolita: 0.6rem;
 }
 * {
     margin: 0;
@@ -26,13 +30,14 @@ body {
 
 }
 .menu {
-    border-bottom: solid 1px var(--color-inactivo);
+    border-bottom: solid 1px var(--color-secundario);
     box-sizing: border-box;
     padding: 0.5rem 1rem 0.4rem;
         
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    row-gap: 1rem;
 }
 .menu > :last-child {
     margin: 0 0 0 auto;
@@ -43,48 +48,58 @@ svg {
     padding: 0.2rem;
 }
 svg:hover {
-    fill: var(--color-realce);
+    fill: var(--color-frente);
 }
 .espaciador *, .espaciador:hover * {
-    fill: var(--color-inactivo);
+    fill: var(--color-secundario);
     margin: 0 0.5rem;
     opacity: 0.5;
 }
 input:not([type="range"]) {
     display: none;
 }
-span:not(.espaciador), label {
+span:not(.espaciador), 
+label {
     cursor: pointer;
     margin-inline: 0.2rem;
+}
+.tecladoInput {
+    position: relative;
 }
 button {
     border: none;
     background: none;
 }
+button svg {
+    fill: var(--color-advertencia);
+}
 
 /* Comportamientos específicos */
+
+/* Herramientas de dibujo */
+.edicionDibujo {
+    display: flex;
+}
 /* Tipo de dibujo */
-#dibujoClick_label > *,
-#dibujoTeclado_label > * {
-    fill: var(--color-inactivo);
-}
-#dibujoClick:checked ~ #dibujoClick_label *{
-    fill: var(--color-secundario);
-}
-#dibujoClick:checked ~ .dibTeclado {
-    display: none;
-}
-#dibujoTeclado:checked ~ #dibujoTeclado_label * {
-    fill: var(--color-secundario);
-}
-#dibujoTeclado:checked ~ .dibClick {
-    display: none;
-}
-/* Dibujo Click */
-#dibujarClick:checked ~ #dibujarClick_label * {
+#dibujoTeclado:checked ~ #teclado_label * {
     fill: var(--color-realce);
 }
-#aerografoClick:checked ~ #aerografoClick_label * {
+#dibujoTeclado:not(:checked) ~ * > * .dibClick {
+    display: none;
+}
+.referenciaTeclado {
+    position: absolute;
+    font-size: 0.7rem;
+    color: var(--color-frente);
+    bottom: 0;
+    right: 0;
+    transform: translate(0.1rem, 0.3rem);
+}
+/* Dibujo */
+#dibujar:checked ~ #dibujar_label * {
+    fill: var(--color-realce);
+}
+#aerografo:checked ~ #aerografo_label * {
     fill: var(--color-realce);
 }
 /* color random */
@@ -92,10 +107,103 @@ button {
     fill: var(--color-realce);
 }
 /* Borrar Click*/
-#borrarClick:checked ~ #borrarClick_label * {
+#borrar:checked ~ #borrar_label * {
     fill: var(--color-realce);
+}
+/* Editor de lienzo*/
+.edicionLienzo {
+    display: flex;
+    align-items: flex-start;
 }
 /* Visualizar retícula */
 #reticula:checked ~ #reticula_label * {
     fill: var(--color-realce);
+}
+/* Detalle de la grilla */
+[type=range] {
+    align-self: center;
+    margin: -0.2rem 0 0;
+    padding: 0;
+    height: var(--rango-tamanno-bolita);
+    width: var(--rango-ancho);
+    background: none;
+}
+[type=range], [type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+[type=range]::-webkit-slider-runnable-track {
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-ancho);
+    height: var(--rango-alto-linea);
+    background: var(--color-secundario);
+}
+[type=range]::-moz-range-track {
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-ancho);
+    height: var(--rango-alto-linea);
+    background: var(--color-secundario);
+}
+[type=range]::-ms-track {
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-ancho);
+    height: var(--rango-alto-linea);
+    background: var(--color-secundario);
+}
+[type=range]::-moz-range-progress {
+    height: var(--rango-alto-linea);
+    background: var(--color-frente);
+}
+[type=range]::-ms-fill-lower {
+    height: var(--rango-alto-linea);
+    background: var(--color-frente);
+}
+[type=range]::-webkit-slider-thumb {
+    margin-top: -0.2rem; /* Número mágico */
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-tamanno-bolita);
+    height: var(--rango-tamanno-bolita);
+    border-radius: 50%;
+    background: var(--color-frente);
+}
+[type=range]::-moz-range-thumb {
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-tamanno-bolita);
+    height: var(--rango-tamanno-bolita);
+    border-radius: 50%;
+    background: var(--color-frente);
+}
+[type=range]::-ms-thumb {
+    margin-top: 0;
+    box-sizing: border-box;
+    border: none;
+    width: var(--rango-tamanno-bolita);
+    height: var(--rango-tamanno-bolita);
+    border-radius: 50%;
+    background: var(--color-frente);
+}
+[type=range]::-ms-tooltip {
+    display: none;
+}
+
+/* formato */
+.formatoTxt {
+    color: var(--color-secundario);
+    margin-top: 0.1rem;
+}
+#formatoFull:checked ~ #formatoFull_label * {
+    fill: var(--color-realce);
+}
+#formatoCine:checked ~ #formatoCine_label {
+    color: var(--color-realce);
+}
+#formatoFoto:checked ~ #formatoFoto_label {
+    color: var(--color-realce);
+}
+#formatoCuadrado:checked ~ #formatoCuadrado_label {
+    color: var(--color-realce);
 }
