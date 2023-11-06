@@ -5,7 +5,7 @@
     --color-realce: #26241f;
     --color-secundario: #998b5c;
     --color-advertencia: #cc544b;
-
+/* Dimensiones barra range */
     --rango-ancho: 120px;
     --rango-alto-linea: 0.15rem;
     --rango-tamanno-bolita: 0.6rem;
@@ -21,19 +21,16 @@ html {
 body {
     background-color: var(--color-fondo);
     color: var(--color-frente);
-
     height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
+    justify-content: flex-start;
 }
 .menu {
     border-bottom: solid 1px var(--color-secundario);
     box-sizing: border-box;
     padding: 0.5rem 1rem 0.4rem;
-        
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -42,75 +39,82 @@ body {
 .menu > :last-child {
     margin: 0 0 0 auto;
 }
-svg {
+label svg {
     fill: var(--color-secundario);
     font-size: 1.1rem;
     padding: 0.2rem;
 }
-svg:hover {
+label svg:hover {
     fill: var(--color-frente);
 }
-.espaciador *, .espaciador:hover * {
+.espaciador {
     fill: var(--color-secundario);
-    margin: 0 0.5rem;
+    margin: 0.3rem 0.6rem;
     opacity: 0.5;
+    cursor: default;
 }
-input[type="checkbox"],
-input[type="radio"]{
+.espaciadorTXT {
+    margin: 0;
+    top: -4px;
+    padding: 0;
+    cursor: default;
+}
+input[type="checkbox"], input[type="radio"]{
     display: none;
 }
-
-span:not(.espaciador), 
-label {
+span, label {
     cursor: pointer;
     margin-inline: 0.2rem;
-}
-.tecladoInput {
     position: relative;
+    color: var(--color-secundario);
+    margin: 0 0.5rem;
 }
-button {
-    border: none;
-    background: none;
-}
-button svg {
-    fill: var(--color-advertencia);
-}
-
 /* Comportamientos específicos */
-
 /* Herramientas de dibujo */
 .edicionDibujo {
     display: flex;
 }
-/* Tipo de dibujo */
-#dibujoTeclado:checked ~ #teclado_label * {
+/* Feedback del estado de los inputs */
+input:checked + label svg {
     fill: var(--color-realce);
 }
-#dibujoTeclado:not(:checked) ~ * > * .dibClick {
+input:checked + label {
+    color: var(--color-realce);
+}
+.toggleReticula + label svg:nth-child(2) {
     display: none;
 }
+.toggleReticula:checked + label svg {
+    fill: var(--color-secundario);
+}
+.toggleReticula:checked + label svg:first-child {
+    fill: var(--color-secundario);
+    display: none;
+}
+.toggleReticula:checked + label svg:nth-child(2) {
+    fill: var(--color-secundario);
+    display: unset;
+}
+
 .referenciaTeclado {
     position: absolute;
     font-size: 0.7rem;
     color: var(--color-frente);
     bottom: 0;
     right: 0;
-    transform: translate(0.1rem, 0.3rem);
+    transform: translate(0.5rem, 0.3rem);
 }
-/* Dibujo */
-#dibujar:checked ~ #dibujar_label * {
-    fill: var(--color-realce);
-}
-#aerografo:checked ~ #aerografo_label * {
-    fill: var(--color-realce);
+.referenciaVisible {
+    display: unset;
 }
 /* Selector de color */
 input[type=color] {
+    align-self: center;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 1rem;
-    height: 1rem;
+    width: 1.1rem;
+    height: 1.1rem;
     border-radius: 50%;
     background: none;
     cursor: pointer; 
@@ -124,27 +128,16 @@ input[type=color]::-webkit-color-swatch {
 }
 input[type=color]::-webkit-color-swatch-wrapper {
     padding: 0; 
+    margin: 0.2rem 0 0;
 }
 input[type=color]::-moz-color-swatch {
     border-radius: 50%;
     border: none;
 }
-/* color random */
-#colorRandom:checked ~ #colorRandom_label * {
-    fill: var(--color-realce);
-}
-/* Borrar Click*/
-#borrar:checked ~ #borrar_label * {
-    fill: var(--color-realce);
-}
 /* Editor de lienzo*/
 .edicionLienzo {
     display: flex;
-    align-items: flex-start;
-}
-/* Visualizar retícula */
-#reticula:checked ~ #reticula_label * {
-    fill: var(--color-realce);
+    align-items: center;
 }
 /* Detalle de la grilla */
 input[type=range] {
@@ -216,20 +209,49 @@ input[type=range]::-ms-thumb {
 input[type=range]::-ms-tooltip {
     display: none;
 }
-/* formato */
-.formatoTxt {
-    color: var(--color-secundario);
-    margin: 0.1rem 0.5rem 0 0;
-}
-#formatoFull:checked ~ #formatoFull_label * {
-    fill: var(--color-realce);
-}
-#formatoCine:checked ~ #formatoCine_label {
+/* input numérico */
+input[type=text] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 5ch;
+    height: 1.2rem;
+    padding: 0.2rem 0.5rem;
+    border: solid 1px var(--color-secundario);
+    background: #59554721;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
     color: var(--color-realce);
 }
-#formatoFoto:checked ~ #formatoFoto_label {
-    color: var(--color-realce);
+input[type=text]:focus {
+    border: solid 1px var(--color-advertencia);
+    outline: solid 3px var(--color-advertencia);
+
 }
-#formatoCuadrado:checked ~ #formatoCuadrado_label {
-    color: var(--color-realce);
+/* Limpiar el tablero */
+button {
+    border: none;
+    background: none;
+    margin: 0 0 0 0.8rem;
+    font-size: 1rem;
+}
+
+#limpiarTablero svg {
+    fill: var(--color-advertencia);
+}
+#limpiarTablero:hover svg {
+    fill: var(--color-frente)
+}
+
+.tablero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    height: 100%;
+}
+.delineadoReticula {
+    outline: solid 0.1px var(--color-frente);
+    outline-offset: 0px;
 }
