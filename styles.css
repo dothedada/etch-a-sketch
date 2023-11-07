@@ -214,7 +214,7 @@ input[type=text] {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    width: 5ch;
+    width: 3ch;
     height: 1.2rem;
     padding: 0.2rem 0.5rem;
     border: solid 1px var(--color-secundario);
@@ -222,12 +222,29 @@ input[type=text] {
     border-radius: 4px;
     font-family: 'Roboto Mono', monospace;
     font-size: 0.8rem;
+    text-align: center;
     color: var(--color-realce);
 }
 input[type=text]:focus {
     border: solid 1px var(--color-advertencia);
-    outline: solid 3px var(--color-advertencia);
-
+    outline: solid 1px var(--color-advertencia);
+}
+.tooltip {
+    position: relative;
+    font-size: 0.8rem;
+    color: var(--color-advertencia);
+    height: 1rem;
+    width: 0;
+    margin: 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    transition:
+        margin 0.2s ease-in-out,
+        width 0.5s ease-in-out;
+}
+.tooltip-visible {
+    margin: 0 1rem 0 0;
+    width: 20ch;
 }
 /* Limpiar el tablero */
 button {
@@ -250,8 +267,11 @@ button {
     justify-content: center;
     align-content: flex-start;
     height: 100%;
+    border-bottom: solid 1px var(--color-advertencia);
 }
-.delineadoReticula {
-    outline: solid 0.1px var(--color-frente);
-    outline-offset: 0px;
+.reticulaVisible {
+    outline: dotted 1px var(--color-advertencia);
+}
+.reticulaRedonda {
+    border-radius: 50%;
 }
