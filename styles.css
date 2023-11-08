@@ -6,7 +6,7 @@
     --color-secundario: #998b5c;
     --color-advertencia: #cc544b;
 /* Dimensiones barra range */
-    --rango-ancho: 120px;
+    --rango-ancho: 80px;
     --rango-alto-linea: 0.15rem;
     --rango-tamanno-bolita: 0.6rem;
 }
@@ -26,6 +26,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+.logo {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    width: 2rem;
+    fill: var(--color-secundario);
+    z-index: 10000;
 }
 .menu {
     border-bottom: solid 1px var(--color-secundario);
@@ -246,6 +254,13 @@ input[type=text]:focus {
     margin: 0 1rem 0 0;
     width: 20ch;
 }
+.textoRango {
+    font-size: 0.8rem;
+    color: var(--color-secundario);
+    height: 1rem;
+    width: 4ch;
+    margin: 0.2rem 0 0 0.2rem;
+}
 /* Limpiar el tablero */
 button {
     border: none;
@@ -260,18 +275,17 @@ button {
 #limpiarTablero:hover svg {
     fill: var(--color-frente)
 }
-
+/* Clases para los elementos creados en JS */
 .tablero {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
-    height: 100%;
-    border-bottom: solid 1px var(--color-advertencia);
+    border-bottom: solid 1px var(--color-secundario);
 }
-.reticulaVisible {
+.reticulaVisible > div {
     outline: dotted 1px var(--color-advertencia);
 }
-.reticulaRedonda {
+.reticulaRedonda > div {
     border-radius: 50%;
 }
