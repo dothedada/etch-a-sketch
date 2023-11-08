@@ -162,3 +162,5 @@ window.addEventListener('keydown', evento => {
             break
     }
 })
+
+// Funcionamiento en pantallas táctiles
