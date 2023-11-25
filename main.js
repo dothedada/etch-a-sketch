@@ -1,4 +1,3 @@
-// llamado de los elementos de la interfase
 const acciones = document.querySelectorAll('[name="accion"]')
 const aerografo = document.getElementById('aerografo')
 const aerografoFlujo = document.getElementById('aerografoFlujo')
@@ -12,55 +11,44 @@ const tooltip = document.getElementById('tooltip')
 const reticulaDensidadTexto = document.getElementById('reticulaDensidadTexto')
 const botonReiniciar = document.getElementById('limpiarTablero')
 
-// Creación del tablero de dibujo
 const tablero = document.createElement('div')
 tablero.classList.add('tablero')
 document.body.appendChild(tablero)
 
-// Seteo inicial de valores
 let dibujar = false
 reticulaDensidadTexto.value = reticulaDensidad.value
 aerografoFlujoTexto.textContent = `${Math.round(aerografoFlujo.value * 100)}%`
 
-// Creación del comportamiento del color
-// Creación de la mezcla de color
 const mezclarColor = (colorPincel, colorFondo = '#f2efe6', valorMezcla = 0.25) => {
-    // Toma la cadena con el Hex del color, quita el primer caracte
-    // crea un array de acuerdo al Regex que la corta cada dos caracteres [R, G, B]
-    // pasa ese valor hexadecimal a un número decimal
     const color1 = colorPincel.substring(1).match(/\w\w/g).map(valor => parseInt(valor, 16))
     const color2 = colorFondo.slice(4, -1).split(', ').map(valor => Number(valor))
-    // Se suman los valores de cada canal en relación a la mezcla y se convierten a Hex
-    // para luego agregarlos a la cadena
     let colorFinal = '#'
     for(let i = 0; i < 3; i++) {
         colorFinal += Math.round(color2[i] + (color1[i] - color2[i]) * valorMezcla).toString(16).padStart(2, '0')
     }
     return colorFinal
 }
-// 'Carga' el color al pincel
-const crearColor = (pixelDestino) => { // Crea el color que se le va a asignar al pixel
-    const random = `#${Math.floor(Math.random()*16777215).toString(16)}` //Dibujar -Aplica color random
+
+const crearColor = (pixelDestino) => {
+    const random = `#${Math.floor(Math.random()*16777215).toString(16)}`
     if(acciones[0].checked && aerografo.checked) {
-        if(!colorRandom.checked) return mezclarColor(color.value, pixelDestino, aerografoFlujo.value) //Dibujar -Aplica color del picker
+        if(!colorRandom.checked) return mezclarColor(color.value, pixelDestino, aerografoFlujo.value)
         color.value = random
         return mezclarColor(random, pixelDestino, aerografoFlujo.value)
     }
     if(acciones[0].checked) {
-        if(!colorRandom.checked) return color.value //Dibujar -Aplica color del picker
+        if(!colorRandom.checked) return color.value 
         color.value = random
         return random
     }
     if(acciones[1].checked && aerografo.checked) return mezclarColor('#f2efe6', pixelDestino, aerografoFlujo.value) 
-    if(acciones[1].checked) return '#f2efe6' // Borrar -Aplica color del fondo
+    if(acciones[1].checked) return '#f2efe6'
 }
 
-// Creación de los pixeles del tablero
 const crearPixeles = () => {
     tablero.style.height = '100%'
-    // Calcula cantidad de filas al dividir alto disponible entre columnas posibles
     let pixelesFilas = Math.floor(tablero.clientHeight / (tablero.clientWidth / reticulaDensidad.value))
-    if (pixelesFilas > 56) pixelesFilas = 56 // 48-56 límite para evitar problemas de procesamiento
+    if (pixelesFilas > 56) pixelesFilas = 56 
     for(let i = 1; i <= (reticulaDensidad.value * pixelesFilas); i++){
         const pixel = document.createElement('div')
         pixel.style.width = `${(100 / reticulaDensidad.value)}%` 
@@ -74,23 +62,24 @@ const crearPixeles = () => {
     }
     tablero.style.height = 'unset'
 }
-// Funciones que trabajan sobre la configuración del tablero
+
 const verReticula = () => tablero.classList.toggle('reticulaVisible')
+
 const cambiarFormaReticula = () => tablero.classList.toggle('reticulaRedonda')
+
 const borrarTablero = () => {
     for(const pixel of tablero.children) pixel.style.background = '#f2efe6'
 }
+
 const redibujarTablero = fuente => {
     reticulaDensidad.value = fuente
     reticulaVisualizacion.checked = false
     reticulaForma.checked = false
     tablero.textContent = '' // No sé si sea la solución más elegante
-    // La siguente solución creo que formalmente es más clara pero es un bucle que consume recursos
-    // while(tablero.lastElementChild) tablero.removeChild(tablero.lastElementChild)
     crearPixeles()
 }
 crearPixeles()
-// activacion del dibujo
+
 tablero.addEventListener('mousedown', evento => {
     evento.preventDefault()
     evento.target.style.background = crearColor(evento.target.style.background)
@@ -100,7 +89,6 @@ tablero.addEventListener('mouseup', () => {
     dibujar = false
 })
 
-// Asignación de la funcionalidad de la interfase
 window.addEventListener('resize', redibujarTablero)
 reticulaVisualizacion.addEventListener('click', verReticula)
 reticulaForma.addEventListener('click', cambiarFormaReticula)
@@ -131,7 +119,6 @@ reticulaDensidadTexto.addEventListener('change', () => {
 })
 botonReiniciar.addEventListener('click', borrarTablero)
 
-// Asignación de teclado
 window.addEventListener('keydown', evento => {
     switch (evento.code){
         case 'KeyB':
@@ -162,5 +149,3 @@ window.addEventListener('keydown', evento => {
             break
     }
 })
-
-// Funcionamiento en pantallas táctiles
