@@ -1,5 +1,8 @@
 # Mi tablero de dibujo
-Este es un ejercicio de programación en el cual creo un tablero de dibujo con las siguientes características:
+
+**[Version en vivo](https://dothedada.github.io/etch-a-sketch/)**
+
+Este es un ejercicio de programación para TOP en el cual creo un tablero de dibujo con las siguientes características:
 - El tablero se ajusta a la pantalla y calcula los "Pixeles" en función de la altura del navegador
 - Aplicación de color directa o que realiza una mezcla por promedio con el color inferior, la proporción de la mezcla puede ser modificada por el usuario.
 - Aplicación de color aleatoria que actualiza la información del selector de color.
